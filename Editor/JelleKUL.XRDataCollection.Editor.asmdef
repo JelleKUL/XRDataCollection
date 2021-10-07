@@ -1,8 +1,8 @@
 {
-    "name": "JelleKUL.XRDataCollection.Editor",
+    "name": "JelleKul.XRDataCollection.Editor",
     "rootNamespace": "",
     "references": [
-        "JelleKUL.XRDataCollection"
+        "GUID:1505c1d6fc13a6e4c9c4859b30157716"
     ],
     "includePlatforms": [
         "Editor"
