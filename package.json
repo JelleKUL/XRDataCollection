@@ -1,0 +1,21 @@
+{
+  "name": "com.jellekul.xr-data-collection",
+  "version": "0.0.1",
+  "displayName": "XR Data Collection",
+  "description": "Tools to collect sensory data from XR devices in the Unity engine",
+  "keywords": [
+    "mesh",
+    "images",
+    "xr"
+  ],
+  "author": {
+    "name": "Jelle Vermandere",
+    "email": "jelle.vermandere@kuleuven.be",
+    "url": "http://www.jellever.be"
+  },
+  "type": "tool",
+  "dependencies": {
+    "com.unity.xr.openxr": "1.2.8",
+    "com.unity.xr.arfoundation": "4.1.7"
+  }
+}
