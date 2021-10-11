@@ -11,7 +11,7 @@ namespace JelleKUL.XRDataCollection
 
         public AssetSession()
         {
-            sessionData.sessionId = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            sessionData.sessionId = "session-" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + System.IO.Path.DirectorySeparatorChar + sessionData.sessionId);
         }
 
