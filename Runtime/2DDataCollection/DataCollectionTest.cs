@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JelleKUL.XRDataCollection;
 
 public class DataCollectionTest : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DataCollectionTest : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath);
     }
 
     public void TakeCameraShot()
