@@ -64,14 +64,14 @@ namespace JelleKUL.XRDataCollection
     {
         public string id = "";
 
-        private string px = "";
-        private string py = "";
-        private string pz = "";
+        public string px = "";
+        public string py = "";
+        public string pz = "";
         
-        private string rx = "";
-        private string ry = "";
-        private string rz = "";
-        private string rw = "";
+        public string rx = "";
+        public string ry = "";
+        public string rz = "";
+        public string rw = "";
 
         public int fov = 0;
 

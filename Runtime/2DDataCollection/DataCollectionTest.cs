@@ -9,6 +9,12 @@ public class DataCollectionTest : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
+    [SerializeField]
+    private Mesh saveMesh;
+
+    [SerializeField]
+    AssetSessionManager assetSessionManager;
+
     private bool grab;
 
     private void Start()
@@ -18,7 +24,17 @@ public class DataCollectionTest : MonoBehaviour
 
     public void TakeCameraShot()
     {
+        
         grab = true;
+    }
+
+    public void SaveMesh()
+    {
+        if (saveMesh)
+        {
+            Debug.Log("Attempting to save a mesh");
+            assetSessionManager.SaveMesh(saveMesh);
+        }
     }
 
     public void GetPicInfo()
@@ -44,18 +60,9 @@ public class DataCollectionTest : MonoBehaviour
         targetTexture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         targetTexture.Apply();
 
-        string path = "/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".jpg";
-
-        if (ImageSaver.SaveImage(targetTexture, path))
-        {
-            Debug.Log("Succesfully saved the image at path:" + path);
-        }
-
-        //Debug.Log(JPGEditor.GetAllJPEGData(path, true));
-        string dataToSave = TransformSerialiser.SerializeSimpleTransform(new SimpleTransform(transform));
-        Debug.Log("Data to save: " + dataToSave);
-        //JPGEditor.SetJPEGData(path, 270, dataToSave, true); 
-        // edit the saved picture with the transformdata
+        assetSessionManager.SaveImage(new SimpleTransform(Camera.main.transform), targetTexture);
 
     }
+
+
 }
