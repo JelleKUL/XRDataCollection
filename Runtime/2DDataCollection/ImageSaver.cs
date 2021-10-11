@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 
 /// <summary>
 /// Methods to save and load jpegs
@@ -21,7 +20,11 @@ public class ImageSaver : MonoBehaviour
         string destination = Application.persistentDataPath + imagePath;
 
         byte[] imageBytes = imageTexture.EncodeToJPG(quality);
+
         System.IO.File.WriteAllBytes(destination, imageBytes);
+        
+
+        
 
         return true;
     }
@@ -36,12 +39,13 @@ public class ImageSaver : MonoBehaviour
         Texture2D tex = null;
         byte[] imageBytes;
 
-        if (File.Exists(imagePath))
+        if (System.IO.File.Exists(imagePath))
         {
-            imageBytes = File.ReadAllBytes(imagePath);
+            imageBytes = System.IO.File.ReadAllBytes(imagePath);
             tex = new Texture2D(2, 2);
             tex.LoadImage(imageBytes); //..this will auto-resize the texture dimensions.
         }
+        
         return tex;
     }
 }

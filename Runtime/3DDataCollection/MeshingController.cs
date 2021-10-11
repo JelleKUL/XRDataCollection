@@ -14,10 +14,16 @@ namespace JelleKUL.XRDataCollection
         [SerializeField]
         private ARMeshManager arMeshManager;
 
+        [Header("Bounding Volume")]
         [SerializeField]
         private bool updateBoundingVolume = true;
         [SerializeField]
         private Vector3 boundingExtents = Vector3.one * 3;
+
+        [Header("Visual Parameters")]
+        [SerializeField]
+        private Color activeOcclusionColor = Color.red;
+        private bool occlusionActive = false;
 
 
         private void Update()
@@ -27,6 +33,8 @@ namespace JelleKUL.XRDataCollection
                 if (!CheckMeshManager()) return;
                 arMeshManager.subsystem.SetBoundingVolume(Camera.main.transform.position, boundingExtents);
             }
+
+
         }
 
         /// <summary>
@@ -63,6 +71,13 @@ namespace JelleKUL.XRDataCollection
 
             value = Mathf.Clamp(value, 0, 1);
             arMeshManager.density = value;
+        }
+
+        public void ToggleOcclusionColor()
+        {
+            occlusionActive = !occlusionActive;
+
+            Camera.main.backgroundColor = occlusionActive ? activeOcclusionColor : Color.black;
         }
 
         /// <summary>
