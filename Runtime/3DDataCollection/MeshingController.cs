@@ -13,70 +13,56 @@ namespace JelleKUL.XRDataCollection
     {
         [SerializeField]
         private ARMeshManager arMeshManager;
-        // Start is called before the first frame update
-        void Start()
+
+        [SerializeField]
+        private bool updateBoundingVolume = true;
+        [SerializeField]
+        private Vector3 boundingExtents = Vector3.one * 3;
+
+
+        private void Update()
         {
+            if (updateBoundingVolume)
+            {
+                if (!CheckMeshManager()) return;
+                arMeshManager.subsystem.SetBoundingVolume(Camera.main.transform.position, boundingExtents);
+            }
         }
 
         /// <summary>
-        /// Reset the mesh observer
+        /// Reset the Meshing
         /// </summary>
         public void ResetScan()
         {
-            if (!CheckObserver()) return;
-            //observer.Reset();
+            if (!CheckMeshManager()) return;
+            StopScanning();
+            StartScanning();
         }
+
         /// <summary>
-        /// Start the mesh observer
+        /// Start the Meshing
         /// </summary>
         public void StartScanning()
         {
-            if (!CheckObserver()) return;
-            //observer.Resume();
+            if (!CheckMeshManager()) return;
+            arMeshManager.subsystem.Start();
         }
 
         /// <summary>
-        /// Pause the mesh Observer
+        /// Pause the Meshing
         /// </summary>
-        public void PauseScanning()
+        public void StopScanning()
         {
-            if (!CheckObserver()) return;
-            //observer.Suspend();
+            if (!CheckMeshManager()) return;
+            arMeshManager.subsystem.Stop();
         }
 
-        /// <summary>
-        /// Set the level of detail of the mesh observer
-        /// </summary>
-        /// <param name="lod">-1: custom, 0: Coarse, 1: Medium, 2: Fine, 255: Unlimited</param>
-        /// <param name="customResolution">if lod = custom, this set the triangles per cubic meter</param>
-        public void SetLevelOfDetail(int lod, int customResolution = 0)
+        public void SetDensity(float value)
         {
-            if (!CheckObserver()) return;
-            /*
-            switch (lod)
-            {
-                case -1:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Custom;
-                    observer.TrianglesPerCubicMeter = customResolution;
-                    break;
-                case 0:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
-                    break;
+            if (!CheckMeshManager()) return;
 
-                case 1:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Medium;
-                    break;
-                case 2:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Fine;
-                    break;
-                case 255:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Unlimited;
-                    break;
-                default:
-                    observer.LevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
-                    break;
-            }
-            */
+            value = Mathf.Clamp(value, 0, 1);
+            arMeshManager.density = value;
         }
 
         /// <summary>
@@ -85,14 +71,14 @@ namespace JelleKUL.XRDataCollection
         /// <returns>a list of all the meshes</returns>
         public List<Mesh> GetSpacialMeshList()
         {
-            if (!CheckObserver()) return null;
+            if (!CheckMeshManager()) return null;
             List<Mesh> meshList = new List<Mesh>();
-            /*
-            foreach (SpatialAwarenessMeshObject meshObject in observer.Meshes.Values)
+
+            foreach (MeshFilter meshObject in arMeshManager.meshes)
             {
-                meshList.Add(meshObject.Filter.mesh);
+                meshList.Add(meshObject.mesh);
             }
-            */
+            
             return meshList;
         }
 
@@ -102,18 +88,18 @@ namespace JelleKUL.XRDataCollection
         /// <returns>One combined mesh</returns>
         public Mesh GetSpacialMesh()
         {
-            if (!CheckObserver()) return null;
-            /*
-            CombineInstance[] combine = new CombineInstance[observer.Meshes.Count];
+            if (!CheckMeshManager()) return null;
+            
+            CombineInstance[] combine = new CombineInstance[arMeshManager.meshes.Count];
 
-            for (int i = 0; i < observer.Meshes.Count; i++)
+            for (int i = 0; i < arMeshManager.meshes.Count; i++)
             {
-                combine[i].mesh = observer.Meshes[i].Filter.mesh;
-                combine[i].transform = observer.Meshes[i].Filter.transform.localToWorldMatrix;
+                combine[i].mesh = arMeshManager.meshes[i].mesh;
+                combine[i].transform = arMeshManager.meshes[i].transform.localToWorldMatrix;
             }
-            */
+            
             Mesh newMesh = new Mesh();
-            //newMesh.CombineMeshes(combine);
+            newMesh.CombineMeshes(combine);
 
             return newMesh;
         }
@@ -122,21 +108,17 @@ namespace JelleKUL.XRDataCollection
         /// check if the observer is active in the scene
         /// </summary>
         /// <returns>the existance of the observer in the scene</returns>
-        bool CheckObserver()
+        bool CheckMeshManager()
         {
-            /*
-            if (observer != null)
+            if (arMeshManager != null)
             {
                 return true;
             }
             else
             {
-                Debug.LogWarning("*MeshingController*: No mesh observer active");
+                Debug.LogWarning("*MeshingController*: No mesh manager active");
                 return false;
             }
-            */
-            return false;
         }
-
     }
 }
