@@ -11,14 +11,14 @@ namespace JelleKUL.XRDataCollection
         [SerializeField]
         private bool spawnInScene = true;
         [SerializeField]
-        private bool SaveImage = false;
+        private bool saveImage = false;
         [SerializeField]
-        private bool UseAssetSession = true;
+        private bool useCaptureSession = true;
         [SerializeField]
         [Tooltip("Only used if assetSessionManager is not used")]
         private string customSavePath = "image.jpg";
         [SerializeField]
-        private AssetSessionManager assetSessionManager;
+        private CaptureSessionManager captureSessionManager;
 
         [SerializeField]
         private Shader textureShader = null;
@@ -184,12 +184,12 @@ namespace JelleKUL.XRDataCollection
                     }
                 }
 
-                if (SaveImage)
+                if (saveImage)
                 {
                     Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
                     photoCaptureFrame.UploadImageDataToTexture(targetTexture);
 
-                    if (UseAssetSession && assetSessionManager)
+                    if (useCaptureSession && captureSessionManager)
                     {
                         Matrix4x4 cameraToWorldMatrix = Matrix4x4.identity;
 
@@ -198,7 +198,7 @@ namespace JelleKUL.XRDataCollection
                             photoCaptureFrame.TryGetCameraToWorldMatrix(out cameraToWorldMatrix);
                         }
 
-                        assetSessionManager.SaveImage(new SimpleTransform(cameraToWorldMatrix), targetTexture);
+                        captureSessionManager.SaveImage(new SimpleTransform(cameraToWorldMatrix), targetTexture);
 
                     }
                     else

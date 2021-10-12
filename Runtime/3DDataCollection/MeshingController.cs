@@ -27,7 +27,7 @@ namespace JelleKUL.XRDataCollection
 
         [Header("Saving Parameters")]
         [SerializeField]
-        private AssetSessionManager assetSessionManager;
+        private CaptureSessionManager captureSessionManager;
 
 
         private void Update()
@@ -125,14 +125,14 @@ namespace JelleKUL.XRDataCollection
 
         public void SaveCombinedMesh()
         {
-            if (!assetSessionManager)
+            if (!captureSessionManager)
             {
                 Debug.Log("No AssetSessionManager set...");
                 return;
             }
             Mesh meshToSave = GetSpacialMesh();
 
-            assetSessionManager.SaveMesh(meshToSave);
+            captureSessionManager.SaveMesh(meshToSave);
 
             
         }

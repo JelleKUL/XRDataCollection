@@ -13,7 +13,7 @@ public class DataCollectionTest : MonoBehaviour
     private Mesh saveMesh;
 
     [SerializeField]
-    AssetSessionManager assetSessionManager;
+    CaptureSessionManager assetSessionManager;
 
     private bool grab;
 

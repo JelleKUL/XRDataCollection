@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace JelleKUL.XRDataCollection
 {
-    public class AssetSession
+    public class CaptureSession
     {
-        SessionData sessionData = new SessionData();
+        CaptureData sessionData = new CaptureData();
 
-        public AssetSession()
+        public CaptureSession()
         {
             sessionData.sessionId = "session-" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + System.IO.Path.DirectorySeparatorChar + sessionData.sessionId);
@@ -40,16 +40,16 @@ namespace JelleKUL.XRDataCollection
         {
             string newJsonstring = JsonUtility.ToJson(sessionData, true);
 
-            System.IO.File.WriteAllText(Application.persistentDataPath + System.IO.Path.DirectorySeparatorChar + sessionData.sessionId + System.IO.Path.DirectorySeparatorChar + sessionData.jsonid, newJsonstring);
+            System.IO.File.WriteAllText(Application.persistentDataPath + System.IO.Path.DirectorySeparatorChar + sessionData.sessionId + System.IO.Path.DirectorySeparatorChar + sessionData.jsonId, newJsonstring);
         }
     }
 
     [System.Serializable]
-    public class SessionData
+    public class CaptureData
     {
         public string sessionId = "";
 
-        public string jsonid = "SessionData.json";
+        public string jsonId = "SessionData.json";
 
         public List<SimpleTransform> imageTransforms = new List<SimpleTransform>();
 

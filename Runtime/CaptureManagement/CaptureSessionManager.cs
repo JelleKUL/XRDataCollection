@@ -8,9 +8,9 @@ namespace JelleKUL.XRDataCollection
     /// <summary>
     /// Manage a bunch of assets to save in one place during a session
     /// </summary>
-    public class AssetSessionManager : MonoBehaviour
+    public class CaptureSessionManager : MonoBehaviour
     {
-        private AssetSession assetSession;
+        private CaptureSession assetSession;
 
         public void SaveImage(SimpleTransform simpleTransform, Texture2D imageTexture, int quality = 75)
         {
@@ -26,7 +26,7 @@ namespace JelleKUL.XRDataCollection
 
         public void CreateNewSession()
         {
-            assetSession = new AssetSession();
+            assetSession = new CaptureSession();
         }
 
 
@@ -34,7 +34,7 @@ namespace JelleKUL.XRDataCollection
         {
             if(assetSession == null)
             {
-                assetSession = new AssetSession();
+                assetSession = new CaptureSession();
                 
             }
         }
