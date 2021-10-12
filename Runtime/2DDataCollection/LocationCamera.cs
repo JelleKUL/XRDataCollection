@@ -13,9 +13,12 @@ namespace JelleKUL.XRDataCollection
         [SerializeField]
         private bool SaveImage = false;
         [SerializeField]
-        private string imagePath = "/images";
+        private bool UseAssetSession = true;
         [SerializeField]
-        private bool saveTransformData = true;
+        [Tooltip("Only used if assetSessionManager is not used")]
+        private string customSavePath = "image.jpg";
+        [SerializeField]
+        private AssetSessionManager assetSessionManager;
 
         [SerializeField]
         private Shader textureShader = null;
@@ -180,34 +183,29 @@ namespace JelleKUL.XRDataCollection
                         }
                     }
                 }
+
                 if (SaveImage)
                 {
                     Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
                     photoCaptureFrame.UploadImageDataToTexture(targetTexture);
 
-                    string path = imagePath + "/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".jpg";
-
-                    ImageSaver.SaveImage(targetTexture, path); //save the image
-
-                    if (saveTransformData)
+                    if (UseAssetSession && assetSessionManager)
                     {
+                        Matrix4x4 cameraToWorldMatrix = Matrix4x4.identity;
+
                         if (photoCaptureFrame.hasLocationData)
                         {
-                            photoCaptureFrame.TryGetCameraToWorldMatrix(out Matrix4x4 cameraToWorldMatrix);
-
-                            //JPGEditor.SetJPEGData(path, 270, TransformSerialiser.SerializeSimpleTransform(new SimpleTransform(cameraToWorldMatrix))); // edit the saved picture with the transformdata
+                            photoCaptureFrame.TryGetCameraToWorldMatrix(out cameraToWorldMatrix);
                         }
+
+                        assetSessionManager.SaveImage(new SimpleTransform(cameraToWorldMatrix), targetTexture);
 
                     }
                     else
                     {
-                        if (text != null)
-                        {
-                            text.text += "\nNo location data :(";
-                        }
+                        ImageSaver.SaveImage(targetTexture, customSavePath);
                     }
                 }
-
 
             }
             else

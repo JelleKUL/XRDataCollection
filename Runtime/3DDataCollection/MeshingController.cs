@@ -25,6 +25,10 @@ namespace JelleKUL.XRDataCollection
         private Color activeOcclusionColor = Color.red;
         private bool occlusionActive = false;
 
+        [Header("Saving Parameters")]
+        [SerializeField]
+        private AssetSessionManager assetSessionManager;
+
 
         private void Update()
         {
@@ -117,6 +121,20 @@ namespace JelleKUL.XRDataCollection
             newMesh.CombineMeshes(combine);
 
             return newMesh;
+        }
+
+        public void SaveCombinedMesh()
+        {
+            if (!assetSessionManager)
+            {
+                Debug.Log("No AssetSessionManager set...");
+                return;
+            }
+            Mesh meshToSave = GetSpacialMesh();
+
+            assetSessionManager.SaveMesh(meshToSave);
+
+            
         }
 
         /// <summary>
