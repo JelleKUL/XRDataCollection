@@ -8,6 +8,7 @@ Tools to collect sensory data from XR devices in the Unity engine
 
 <!-- code_chunk_output -->
 
+- [Installation](#installation)
 - [2D Data Collection](#2d-data-collection)
   - [Scripts](#scripts)
     - [LocationCamera](#locationcamera)
@@ -23,6 +24,9 @@ Tools to collect sensory data from XR devices in the Unity engine
 
 <!-- /code_chunk_output -->
 
+## Installation
+
+This can be imported as a UnityPackage in any existing Unity project through the [Package manager](https://docs.unity3d.com/Manual/Packages.html) with the Git url.
 
 ## 2D Data Collection
 
