@@ -1,5 +1,6 @@
 # XRDataCollection
 Tools to collect sensory data from XR devices in the Unity engine
+> This is still under active development and future versions might introduce breaking changes
 
 ```cs
  namespace JelleKUL.XRDataCollection
@@ -38,7 +39,7 @@ If the AR platform tracks its transform in the scene, the transform data will al
 #### LocationCamera
 
 Takes a snapshot of the devices main camera, currently using the `Windows.webcam` namespace
-> **todo** add cross platform support
+> **todo** add cross platform support && merge windows and AR foundation scripts
 
 #### ImageSaver
 

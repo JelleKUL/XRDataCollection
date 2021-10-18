@@ -8,12 +8,8 @@ namespace JelleKUL.XRDataCollection
 
     public class LocationImageReconstructor : MonoBehaviour
     {
-        private Camera cam;
-
         [SerializeField]
         private Shader textureShader = null;
-        [SerializeField]
-        private int descriptionId = 270;
 
         // Start is called before the first frame update
         void Start()

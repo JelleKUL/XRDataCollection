@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6341939313260121631}
   - component: {fileID: 2593552699013342988}
   m_Layer: 0
-  m_Name: AssetSessionManager
+  m_Name: CaptureSessionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8980767392973153347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7323166, y: 0.67460084, z: -5.933662}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInScene: 1
-  SaveImage: 1
-  UseAssetSession: 1
+  saveImage: 1
+  useCaptureSession: 1
   customSavePath: image.jpg
-  assetSessionManager: {fileID: 8980767392973153346}
-  textureShader: {fileID: 0}
+  captureSessionManager: {fileID: 8980767392973153346}
+  textureShader: {fileID: 4800000, guid: 8b654e3fd384a4de59ef63c26f561c18, type: 3}
   text: {fileID: 0}
 --- !u!114 &2593552699013342988
 MonoBehaviour:
@@ -80,4 +80,4 @@ MonoBehaviour:
   updateBoundingVolume: 1
   boundingExtents: {x: 3, y: 3, z: 3}
   activeOcclusionColor: {r: 1, g: 0, b: 0, a: 1}
-  assetSessionManager: {fileID: 8980767392973153346}
+  captureSessionManager: {fileID: 8980767392973153346}
