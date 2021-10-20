@@ -1,26 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
-using System;
-using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using Unity.Collections;
 
 namespace JelleKUL.XRDataCollection
 {
-    public class ARCameraCapture : MonoBehaviour
+    public class ARFoundationCameraCapture : BaseXRCameraCapture
     {
         [SerializeField]
         private ARCameraManager cameraManager;
-        [SerializeField]
-        private bool saveImage = false;
-        [SerializeField]
-        private CaptureSessionManager captureSessionManager;
 
-        private Texture2D cameraTexture;
+        public override void TakeCameraImage()
+        {
+            GetImageAsync();
+        }
 
-        public void GetImageAsync()
+        private void GetImageAsync()
         {
             // Get information about the device camera image.
             if (cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
@@ -42,7 +39,7 @@ namespace JelleKUL.XRDataCollection
             }
         }
 
-        void ProcessImage(XRCpuImage.AsyncConversionStatus status, XRCpuImage.ConversionParams conversionParams, NativeArray<byte> data)
+        private void ProcessImage(XRCpuImage.AsyncConversionStatus status, XRCpuImage.ConversionParams conversionParams, NativeArray<byte> data)
         {
             if (status != XRCpuImage.AsyncConversionStatus.Ready)
             {
@@ -54,11 +51,8 @@ namespace JelleKUL.XRDataCollection
             cameraTexture.LoadRawTextureData(data);
             cameraTexture.Apply();
 
-            if (saveImage)
-            {
-                captureSessionManager.SaveImage(new SimpleTransform(Camera.main.transform), cameraTexture);
-            }
+            if (saveImage) SaveImage(cameraTexture, new SimpleTransform(Camera.main.transform));
+            if (spawnInScene) SpawnImageInScene(cameraTexture, new SimpleTransform(Camera.main.transform));
         }
-
     }
 }

@@ -9,19 +9,20 @@ Tools to collect sensory data from XR devices in the Unity engine
 
 <!-- code_chunk_output -->
 
-- [Installation](#installation)
-- [2D Data Collection](#2d-data-collection)
-  - [Scripts](#scripts)
-    - [LocationCamera](#locationcamera)
-    - [ImageSaver](#imagesaver)
-    - [TransformSerializer](#transformserializer)
-- [3D Data Collection](#3d-data-collection)
-  - [Scripts](#scripts-1)
-    - [MeshingController](#meshingcontroller)
-    - [ObjExporter](#objexporter)
-- [Data Capture Management](#data-capture-management)
-- [Data Reconstruction](#data-reconstruction)
-- [Licensing](#licensing)
+- [XRDataCollection](#xrdatacollection)
+  - [Installation](#installation)
+  - [2D Data Collection](#2d-data-collection)
+    - [Scripts](#scripts)
+      - [CameraCapture](#cameracapture)
+      - [ImageSaver](#imagesaver)
+      - [TransformSerializer](#transformserializer)
+  - [3D Data Collection](#3d-data-collection)
+    - [Scripts](#scripts-1)
+      - [MeshingController](#meshingcontroller)
+      - [ObjExporter](#objexporter)
+  - [Data Capture Management](#data-capture-management)
+  - [Data Reconstruction](#data-reconstruction)
+  - [Licensing](#licensing)
 
 <!-- /code_chunk_output -->
 
@@ -36,10 +37,17 @@ If the AR platform tracks its transform in the scene, the transform data will al
 
 ### Scripts
 
-#### LocationCamera
+#### CameraCapture
 
-Takes a snapshot of the devices main camera, currently using the `Windows.webcam` namespace
-> **todo** add cross platform support && merge windows and AR foundation scripts
+Takes a snapshot of the devices main camera, Currently supprts both AR foundation and Windows.webcam.
+Use:
+```cs
+public void TakeCameraImage()
+```
+
+- `ARFoundationCameraCapture`
+- `WindowsCameraCapture`
+
 
 #### ImageSaver
 

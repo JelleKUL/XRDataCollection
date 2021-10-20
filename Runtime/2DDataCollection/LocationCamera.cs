@@ -5,7 +5,7 @@ using UnityEngine.Windows.WebCam;
 
 namespace JelleKUL.XRDataCollection
 {
-
+    [Obsolete] // replaced by windows camera capture
     public class LocationCamera : MonoBehaviour
     {
         [SerializeField]
