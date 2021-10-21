@@ -26,6 +26,12 @@ Tools to collect sensory data from XR devices in the Unity engine
 
 <!-- /code_chunk_output -->
 
+## ToDo
+
+- [] Solve wrong placement of image planes
+- [] Add server connectivity to send data
+- [] think of more todo's
+
 ## Installation
 
 This can be imported as a UnityPackage in any existing Unity project through the [Package manager](https://docs.unity3d.com/Manual/Packages.html) with the Git url.
