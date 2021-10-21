@@ -28,9 +28,9 @@ Tools to collect sensory data from XR devices in the Unity engine
 
 ## ToDo
 
-- [] Solve wrong placement of image planes
-- [] Add server connectivity to send data
-- [] think of more todo's
+- [ ] Solve wrong placement of image planes
+- [ ] Add server connectivity to send data
+- [ ] think of more todo's
 
 ## Installation
 
