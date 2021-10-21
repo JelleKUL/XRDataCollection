@@ -1,6 +1,6 @@
 {
   "name": "com.jellekul.xr-data-collection",
-  "version": "0.0.211012",
+  "version": "0.0.211021",
   "displayName": "XR Data Collection",
   "description": "Tools to collect sensory data from XR devices in the Unity engine",
   "keywords": [
@@ -11,7 +11,7 @@
   "author": {
     "name": "Jelle Vermandere",
     "email": "jelle.vermandere@kuleuven.be",
-    "url": "http://www.jellever.be"
+    "url": "https://www.jellever.be"
   },
   "type": "tool",
   "dependencies": {

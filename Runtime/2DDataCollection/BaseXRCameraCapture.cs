@@ -37,7 +37,7 @@ namespace JelleKUL.XRDataCollection
         public void SpawnImageInScene(Texture2D image, SimpleTransform simpleTransform)
         {
             ObjectSpawner.SpawnImage(image, simpleTransform, textureShader, imageSpawnDistance, transform);
-            text.text += "\n Image spawned in the scene";
+            LogText("Image spawned in the scene");
         }
 
         public void SaveImage(Texture2D image, SimpleTransform simpleTransform)
@@ -45,12 +45,24 @@ namespace JelleKUL.XRDataCollection
             if (useCaptureSession && captureSessionManager)
             {
                 captureSessionManager.SaveImage(simpleTransform, image);
-                text.text += "\n Image saved by the capture sessionManager";
+                LogText("Image saved by the capture sessionManager");
             }
             else
             {
                 ImageSaver.SaveImage(image, customSavePath);
-                text.text += "\n Image saved @ custom save path";
+                LogText("Image saved @ custom save path");
+            }
+        }
+
+        void LogText(string message, bool reset = false)
+        {
+            if (text)
+            {
+                text.text = (reset? "":text.text) + "\n" + message;
+            }
+            else
+            {
+                Debug.Log((reset ? "" : text.text) + "\n" + message);
             }
         }
     }

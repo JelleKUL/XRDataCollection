@@ -13,6 +13,8 @@ namespace JelleKUL.XRDataCollection
     {
         [SerializeField]
         private ARMeshManager arMeshManager;
+        [SerializeField]
+        protected TextMesh text = null;
 
         [Header("Bounding Volume")]
         [SerializeField]
@@ -131,9 +133,9 @@ namespace JelleKUL.XRDataCollection
                 return;
             }
             Mesh meshToSave = GetSpacialMesh();
-
+            LogText("Got combined mesh");
             captureSessionManager.SaveMesh(meshToSave);
-
+            LogText("Saved mesh to disk");
             
         }
 
@@ -151,6 +153,18 @@ namespace JelleKUL.XRDataCollection
             {
                 Debug.LogWarning("*MeshingController*: No mesh manager active");
                 return false;
+            }
+        }
+
+        void LogText(string message, bool reset = false)
+        {
+            if (text)
+            {
+                text.text = (reset ? "" : text.text) + "\n" + message;
+            }
+            else
+            {
+                Debug.Log((reset ? "" : text.text) + "\n" + message);
             }
         }
     }
