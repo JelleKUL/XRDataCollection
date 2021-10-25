@@ -23,7 +23,7 @@ namespace JelleKUL.XRDataCollection
 			sb.Append("g ").Append(m.name).Append("\n");
 			foreach (Vector3 v in m.vertices)
 			{
-				sb.Append(string.Format("v {0} {1} {2}\n", v.x, v.y, v.z));
+				sb.Append(string.Format("v {0} {1} {2}\n", -v.x, v.y, v.z)); // mirror around the x-axis
 			}
 			sb.Append("\n");
 			foreach (Vector3 v in m.normals)
