@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace JelleKUL.XRDataCollection
         /// <summary>
         /// Serialize a transform into a readable json string containing a position(vector3) and a rotation(quaternion)
         /// </summary>
-        /// <param name="trans">The input transform that needs to be serialized</param>
+        /// <param name= "trans">The input transform that needs to be serialized</param>
         /// <returns>A json string containing position and rotation data</returns>
         public static string SerializeTransform(Transform trans)
         {
@@ -60,7 +59,7 @@ namespace JelleKUL.XRDataCollection
     /// A simple representation of a transform that stores the position and rotation in a serializable object
     /// </summary>
     [System.Serializable]
-    public class SimpleTransform
+    public class SimpleTransform //todo remove the strings and use regular floats
     {
         public string id = "";
 

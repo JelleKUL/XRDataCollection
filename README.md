@@ -10,6 +10,7 @@ Tools to collect sensory data from XR devices in the Unity engine
 <!-- code_chunk_output -->
 
 - [XRDataCollection](#xrdatacollection)
+  - [ToDo](#todo)
   - [Installation](#installation)
   - [2D Data Collection](#2d-data-collection)
     - [Scripts](#scripts)
@@ -22,6 +23,9 @@ Tools to collect sensory data from XR devices in the Unity engine
       - [ObjExporter](#objexporter)
   - [Data Capture Management](#data-capture-management)
   - [Data Reconstruction](#data-reconstruction)
+    - [2D data reconstruction](#2d-data-reconstruction)
+    - [3D data reconstruction](#3d-data-reconstruction)
+  - [Server Connection](#server-connection)
   - [Licensing](#licensing)
 
 <!-- /code_chunk_output -->
@@ -85,6 +89,7 @@ public class SimpleTransform
 ## 3D Data Collection
 
 3D data collection uses the meshing capabilities of the device. This is currently only supported on the Hololens and Magicleap devices.
+Meshes are not linked to a `SimpleTransform` because they are already geo-localised. 
 
 ### Scripts
 
@@ -139,6 +144,23 @@ A central Json file stores all the references to the images and meshes:
 ```
 
 ## Data Reconstruction
+
+The data can be reconstructed from a session.
+The `ObjectSpawner` can spawn both the images and 3D models.
+
+### 2D data reconstruction
+
+The images are reconstructed using their `SimpleTransform` to be placed in the scene.
+
+### 3D data reconstruction
+
+Meshes can be simply spawned in the scene as .obj files.
+If they are from the same session, the mesh cenxterpoint will be the same as the images.
+
+## Server Connection
+
+The whole `CaptureSession` can be send to a webserver using a post request. It is up to the server to interpret the data.
+If the server responds with a calculated location, the App will store it as a reference.
 
 ## Licensing
 
