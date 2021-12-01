@@ -64,80 +64,58 @@ namespace JelleKUL.XRDataCollection
     {
         public string id = "";
 
-        public string px = "";
-        public string py = "";
-        public string pz = "";
-        
-        public string rx = "";
-        public string ry = "";
-        public string rz = "";
-        public string rw = "";
+        public Vector3 pos = Vector3.zero;
+
+        public Vector4 rot = Vector4.zero;
 
         public int fov = 0;
 
 
         public Vector3 position()
         {
-            return new Vector3(float.Parse(px), float.Parse(py), float.Parse(pz));
+            return pos;
         }
         public Quaternion rotation()
         {
-            return new Quaternion(float.Parse(rx), float.Parse(ry), float.Parse(rz), float.Parse(rw));
+            return new Quaternion(rot.x, rot.y, rot.z, rot.w);
         }
 
-        public SimpleTransform(Transform trans, int precision = 4)
+        public SimpleTransform(Transform trans)
         {
-            px = RoundedString(trans.position.x, precision);
-            py = RoundedString(trans.position.y, precision);
-            pz = RoundedString(trans.position.z, precision);
+            pos = trans.position;
 
-            rx = RoundedString(trans.rotation.x, precision);
-            ry = RoundedString(trans.rotation.y, precision);
-            rz = RoundedString(trans.rotation.z, precision);
-            rw = RoundedString(trans.rotation.w, precision);
+            rot = new Vector4(trans.rotation.x, trans.rotation.y, trans.rotation.z, trans.rotation.w);
 
             SetMetadata();
         }
-        public SimpleTransform(Vector3 pos, Quaternion rot, int precision = 4)
+        public SimpleTransform(Vector3 pos, Quaternion rot)
         {
-            px = RoundedString(pos.x, precision);
-            py = RoundedString(pos.y, precision);
-            pz = RoundedString(pos.z, precision);
+            Debug.Log("Creating new Simpletransform");
 
-            ry = RoundedString(rot.y, precision);
-            rz = RoundedString(rot.z, precision);
-            rw = RoundedString(rot.w, precision);
-            rx = RoundedString(rot.x, precision);
+            this.pos = pos;
+
+            this.rot = new Vector4(rot.x, rot.y, rot.z, rot.w);
 
             SetMetadata();
         }
-        public SimpleTransform(Matrix4x4 transformMatrix, int precision = 4)
+        public SimpleTransform(Matrix4x4 transformMatrix)
         {
             Vector3 pos = transformMatrix.GetColumn(3) - transformMatrix.GetColumn(2);
             Quaternion rot = Quaternion.LookRotation(-transformMatrix.GetColumn(2), transformMatrix.GetColumn(1));
 
-            px = RoundedString(pos.x, precision);
-            py = RoundedString(pos.y, precision);
-            pz = RoundedString(pos.z, precision);
+            this.pos = pos;
 
-            ry = RoundedString(rot.y, precision);
-            rz = RoundedString(rot.z, precision);
-            rw = RoundedString(rot.w, precision);
-            rx = RoundedString(rot.x, precision);
+            this.rot = new Vector4(rot.x, rot.y, rot.z, rot.w);
 
             SetMetadata();
         }
 
         void SetMetadata()
         {
+            Debug.Log("Setting metadata");
             fov = Mathf.RoundToInt(Camera.main.fieldOfView);
             id = "img-" + System.DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
-        }
-
-        string RoundedString(float input, int precision)
-        {
-            float rounding = Mathf.Pow(10, precision);
-            return (Mathf.Round(input * rounding) / rounding).ToString();
+            Debug.Log("metadata set");
         }
     }
 }

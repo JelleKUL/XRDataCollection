@@ -32,6 +32,8 @@ namespace JelleKUL.XRDataCollection
 
         void CheckSession()
         {
+            Debug.Log("Checking session");
+
             if(assetSession == null)
             {
                 assetSession = new CaptureSession();

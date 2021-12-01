@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#if UNITY_WSA
 using UnityEngine.Windows.WebCam;
 
 
@@ -169,3 +170,4 @@ namespace JelleKUL.XRDataCollection
 
     }
 }
+#endif

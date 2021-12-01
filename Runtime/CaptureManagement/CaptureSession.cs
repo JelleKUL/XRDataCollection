@@ -17,6 +17,7 @@ namespace JelleKUL.XRDataCollection
 
         public void SaveImage(SimpleTransform simpleTransform, Texture2D imageTexture, int quality = 75)
         {
+            Debug.Log("saving data");
 
             sessionData.imageTransforms.Add(simpleTransform);
 
@@ -50,6 +51,9 @@ namespace JelleKUL.XRDataCollection
         public string sessionId = "";
 
         public string jsonId = "SessionData.json";
+
+        public Vector3 globalPosition = Vector3.zero;
+        public Vector4 globalRotation = Vector4.zero;
 
         public List<SimpleTransform> imageTransforms = new List<SimpleTransform>();
 

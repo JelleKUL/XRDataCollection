@@ -8,7 +8,7 @@ namespace JelleKUL.XRDataCollection
     {
         [Header("Save Parameters")]
         [SerializeField]
-        protected bool saveImage = true;
+        public bool saveImage = true;
         [SerializeField]
         protected bool useCaptureSession = false;
         [SerializeField]
@@ -19,7 +19,7 @@ namespace JelleKUL.XRDataCollection
 
         [Header("Spawn Parameters")]
         [SerializeField]
-        protected bool spawnInScene = true;
+        public bool spawnInScene = true;
         [SerializeField]
         private Shader textureShader = null;
         [SerializeField]
@@ -36,12 +36,15 @@ namespace JelleKUL.XRDataCollection
 
         public void SpawnImageInScene(Texture2D image, SimpleTransform simpleTransform)
         {
+            LogText("spawning image in the scene");
             ObjectSpawner.SpawnImage(image, simpleTransform, textureShader, imageSpawnDistance, transform);
             LogText("Image spawned in the scene");
         }
 
         public void SaveImage(Texture2D image, SimpleTransform simpleTransform)
         {
+            LogText("saving the image");
+
             if (useCaptureSession && captureSessionManager)
             {
                 captureSessionManager.SaveImage(simpleTransform, image);
@@ -62,8 +65,18 @@ namespace JelleKUL.XRDataCollection
             }
             else
             {
-                Debug.Log((reset ? "" : text.text) + "\n" + message);
+                Debug.Log(message);
             }
+        }
+
+        public void testText(Texture2D obj)
+        {
+            Debug.Log("tex works: " + obj);
+        }
+
+        public void testTrans(SimpleTransform obj)
+        {
+            Debug.Log("trans works: " + obj);
         }
     }
 }
