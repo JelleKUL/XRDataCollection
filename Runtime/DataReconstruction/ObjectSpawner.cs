@@ -31,6 +31,7 @@ namespace JelleKUL.XRDataCollection
             newObj.name = simpleTransform.id;
             newObj.transform.position = simpleTransform.position();
             newObj.transform.rotation = simpleTransform.rotation();
+            newObj.transform.position += newObj.transform.forward * distance;
         }
 
         public static void SpawnMesh(Mesh targetMesh, SimpleTransform simpleTransform, Shader meshShader, Transform parent = null)
