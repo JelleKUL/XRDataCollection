@@ -73,14 +73,8 @@ public class SimpleTransform
 {
     public string id = "";
 
-    public string px = "";
-    public string py = "";
-    public string pz = "";
-    
-    public string rx = "";
-    public string ry = "";
-    public string rz = "";
-    public string rw = "";
+    public Vector3 pos = Vector3.zero;
+    public Vector4 rot = Vector4.zero;
 
     public int fov = 0;
 }
@@ -112,27 +106,46 @@ A central Json file stores all the references to the images and meshes:
 {
     "sessionId": "session-yyyy-mm-dd hh-mm-ss",
     "jsonId": "SessionData.json",
+    "globalPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "globalRotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
     "imageTransforms": [
         {
             "id": "img-yyyy-mm-dd hh-mm-ss",
-            "px": "0",
-            "py": "0",
-            "pz": "0",
-            "rx": "0",
-            "ry": "0",
-            "rz": "0",
-            "rw": "0",
+            "pos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "rot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
             "fov": 0
         },
         {
             "id": "img-yyyy-mm-dd hh-mm-ss",
-            "px": "0",
-            "py": "0",
-            "pz": "0",
-            "rx": "0",
-            "ry": "0",
-            "rz": "0",
-            "rw": "0",
+            "pos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "rot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
             "fov": 0
         }
     ],
