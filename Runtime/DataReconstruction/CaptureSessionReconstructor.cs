@@ -54,5 +54,15 @@ namespace JelleKUL.XRDataCollection
 
             ObjectSpawner.SpawnImage(targetTexture, simpleTransform, textureShader, distance, transform);
         }
+        public void PlaceMesh(string path, bool parent = true)
+        {
+            Mesh holderMesh = new Mesh();
+            ObjImporter newMesh = new ObjImporter();
+            // holderMesh = newMesh.ImportFile("C:/Users/cvpa2/Desktop/ng/output.obj");
+
+            MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
+            MeshFilter filter = gameObject.AddComponent<MeshFilter>();
+            filter.mesh = holderMesh;
+        }
     }
 }

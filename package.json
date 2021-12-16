@@ -1,6 +1,6 @@
 {
   "name": "com.jellekul.xr-data-collection",
-  "version": "0.0.211021",
+  "version": "0.0.161221",
   "displayName": "XR Data Collection",
   "description": "Tools to collect sensory data from XR devices in the Unity engine",
   "keywords": [
@@ -19,10 +19,10 @@
     "com.unity.xr.arfoundation": "4.1.7"
   },
   "samples": [
-      {
-          "displayName": "Working Sample scenes",
-          "description": "Shows how everything works in practice",
-          "path": "Samples~/SampleProject"
-      }
+    {
+      "displayName": "Working Sample scenes",
+      "description": "Shows how everything works in practice",
+      "path": "Samples~/SampleProject"
+    }
   ]
 }

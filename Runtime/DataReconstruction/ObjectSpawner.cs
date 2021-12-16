@@ -12,7 +12,11 @@ namespace JelleKUL.XRDataCollection
         public static void SpawnImage(Texture2D targetTexture, SimpleTransform simpleTransform, Shader textureShader, float distance = 1, Transform parent = null)
         {
             //create a texture2D and load the image as a texture
-            GameObject newObj = GameObject.CreatePrimitive(PrimitiveType.Quad);
+           
+            GameObject newObj = new GameObject();
+            CameraFovLogger cameraLogger = newObj.AddComponent<CameraFovLogger>();
+            GameObject imageChild = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            imageChild.transform.parent = newObj.transform;
 
             if (parent != null)
             {
@@ -22,16 +26,20 @@ namespace JelleKUL.XRDataCollection
             float ratio = targetTexture.width / (float)targetTexture.height;
             simpleTransform.fov = Mathf.Clamp(simpleTransform.fov, 0, 179);
             float height = 2 * Mathf.Tan(simpleTransform.fov / 2f * Mathf.Deg2Rad) * distance;
-            newObj.transform.localScale = new Vector3(ratio, 1, 1) * height;
+            imageChild.transform.localScale = new Vector3(ratio, 1, 1) * height;
 
-            Renderer quadRenderer = newObj.GetComponent<Renderer>();
+            Renderer quadRenderer = imageChild.GetComponent<Renderer>();
             quadRenderer.material = new Material(textureShader);
             quadRenderer.sharedMaterial.SetTexture("_MainTex", targetTexture);
+
+            cameraLogger.aspect = ratio;
+            cameraLogger.distance = distance;
+            cameraLogger.fov = simpleTransform.fov;
 
             newObj.name = simpleTransform.id;
             newObj.transform.position = simpleTransform.position();
             newObj.transform.rotation = simpleTransform.rotation();
-            newObj.transform.position += newObj.transform.forward * distance;
+            imageChild.transform.position += newObj.transform.forward * distance;
         }
 
         public static void SpawnMesh(Mesh targetMesh, SimpleTransform simpleTransform, Shader meshShader, Transform parent = null)

@@ -28,7 +28,7 @@ namespace JelleKUL.XRDataCollection
 			sb.Append("\n");
 			foreach (Vector3 v in m.normals)
 			{
-				sb.Append(string.Format("vn {0} {1} {2}\n", v.x, v.y, v.z));
+				sb.Append(string.Format("vn {0} {1} {2}\n", -v.x, v.y, v.z));
 			}
 			sb.Append("\n");
 			foreach (Vector3 v in m.uv)
