@@ -72,6 +72,7 @@ namespace JelleKUL.XRDataCollection
     {
         public string sessionId = "";
         public string jsonId = "SessionData.json";
+        public string sensor = SystemInfo.deviceModel;
         public Vector3 globalPosition = Vector3.zero;
         public Vector4 globalRotation = Vector4.zero;
         public List<SimpleTransform> imageTransforms = new List<SimpleTransform>();

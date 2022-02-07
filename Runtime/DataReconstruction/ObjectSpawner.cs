@@ -24,7 +24,7 @@ namespace JelleKUL.XRDataCollection
             }
 
             float ratio = targetTexture.width / (float)targetTexture.height;
-            simpleTransform.fov = Mathf.Clamp(simpleTransform.fov, 0, 179);
+            simpleTransform.fov = Mathf.Clamp(simpleTransform.fov, 0, 179) * 2;
             float height = 2 * Mathf.Tan(simpleTransform.fov / 2f * Mathf.Deg2Rad) * distance;
             imageChild.transform.localScale = new Vector3(ratio, 1, 1) * height;
 

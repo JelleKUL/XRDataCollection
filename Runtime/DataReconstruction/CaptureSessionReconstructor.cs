@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Dummiesman;
+using System.IO;
 
 namespace JelleKUL.XRDataCollection
 {
@@ -43,6 +44,10 @@ namespace JelleKUL.XRDataCollection
             {
                 PlaceImage(imgTransform);
             }
+            foreach (var meshId in captureData.meshIds)
+            {
+                PlaceMesh(Path.Combine(path, meshId)+".obj");
+            }
 
         }
 
@@ -56,13 +61,18 @@ namespace JelleKUL.XRDataCollection
         }
         public void PlaceMesh(string path, bool parent = true)
         {
-            Mesh holderMesh = new Mesh();
-            ObjImporter newMesh = new ObjImporter();
+            //Mesh holderMesh = new Mesh();
+            //ObjImporter newMesh = new ObjImporter();
             // holderMesh = newMesh.ImportFile("C:/Users/cvpa2/Desktop/ng/output.obj");
 
-            MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
-            MeshFilter filter = gameObject.AddComponent<MeshFilter>();
-            filter.mesh = holderMesh;
+            //MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
+            //MeshFilter filter = gameObject.AddComponent<MeshFilter>();
+            //filter.mesh = holderMesh;
+            GameObject loadedObject = new OBJLoader().Load(path);
+            if (parent)
+            {
+                loadedObject.transform.SetParent(transform);
+            }
         }
     }
 }
